@@ -13,8 +13,8 @@ public class CaregiverService {
     @Autowired
     private CaregiverRepository caregiverRepository;
 
-    public void add(Caregiver caregiver) {
-        caregiverRepository.save(caregiver);
+    public Caregiver add(Caregiver caregiver) {
+        return caregiverRepository.save(caregiver);
     }
     public Caregiver modify(long id, Caregiver caregiver) throws CaregiverNotFoundException {
         Caregiver oldCaregiver = caregiverRepository.findById(id)

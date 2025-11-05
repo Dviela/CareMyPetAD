@@ -16,10 +16,22 @@ public class CaregiverController {
     @Autowired
     private CaregiverService caregiverService;
     @GetMapping("/caregivers")
-    public ResponseEntity<List<Caregiver>> getAll() {
-        List<Caregiver> allCaregivers = caregiverService.findAll();
-        return ResponseEntity.ok(allCaregivers);
+    public ResponseEntity<List<Caregiver>> getAll(@RequestParam(value = "city", defaultValue = "")String city) {
+        List<Caregiver> caregivers;
+        if (!city.isEmpty()){
+            caregivers = caregiverService.findByCity(city);
+        } else {
+            caregivers = caregiverService.findAll();
+        }
+        return ResponseEntity.ok(caregivers);
     }
+    @GetMapping("/caregivers/{id}")
+    public ResponseEntity<Caregiver> get(@PathVariable long id) throws CaregiverNotFoundException{
+        Caregiver caregiver = caregiverService.findById(id);
+        return ResponseEntity.ok(caregiver);
+    }
+
+
     @PostMapping("/caregivers")
     public ResponseEntity<Caregiver> addCaregiver(@RequestBody Caregiver caregiver)
     {

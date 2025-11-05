@@ -38,11 +38,13 @@ public class CaregiverService {
         caregiverRepository.delete(caregiver);
     }
     public List<Caregiver> findAll() {
-        List<Caregiver> allCaregivers = caregiverRepository.findAll();
-        return allCaregivers;
+        return caregiverRepository.findAll();
     }
-    public Caregiver findById(long id) {
-        return null;
+    public List<Caregiver> findByCity(String city){return caregiverRepository.findByCity(city);}
+    public Caregiver findById(long id) throws CaregiverNotFoundException {
+    return caregiverRepository.findById(id)
+            .orElseThrow(CaregiverNotFoundException::new);
+
     }
 
 }

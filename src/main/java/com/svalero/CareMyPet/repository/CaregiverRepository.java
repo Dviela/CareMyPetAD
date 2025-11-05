@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface CaregiverRepository extends CrudRepository <Caregiver, Long> {
 List<Caregiver> findAll(); //Crea un findAll que devuelve una lista
+List<Caregiver> findByCity(String city);
 }
